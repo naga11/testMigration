@@ -1,0 +1,164 @@
+<asset_composite xmlns="http://namespaces.softwareag.com/acdl/1.0" targetNamespace="http://namespaces.softwareag.com/webMethods/IS" name="JDBC103TestPackage" runtimeVersion="9.12.0.0">
+  <implementation.generic type="ispackage" />
+  <buildInfo name="BuildVersion" value="9.8.27" />
+  <buildInfo name="BuildTimestamp" value="2018-07-24T11:59:16" />
+  <buildInfo name="MinimumTargetRuntimeVersion" value="9.12.0.0" />
+  <property name="activatePkgOnInstall" displayName="Activate Package On Install">
+    <value>true</value>
+  </property>
+  <property name="archivePkgOnInstall" displayName="Archive Package On Install">
+    <value>true</value>
+  </property>
+  <property name="compilePackage" displayName="Compile Package On Install">
+    <value>true</value>
+  </property>
+  <property name="fragPackage" displayName="Fragment Package On Install">
+    <value>true</value>
+  </property>
+  <property name="clearACLs" displayName="Delete ACLs for the assets from the target Integration Server">
+    <value>false</value>
+  </property>
+  <property name="disallowActivePackageInstall" displayName="disallowActivePackageInstall">
+    <value>false</value>
+  </property>
+  <property name="packageExecutionCheck" displayName="packageExecutionCheck">
+    <value>0</value>
+  </property>
+  <property name="suspendTriggersDuringDeploy" displayName="Suspend Triggers During Deployment">
+    <value>false</value>
+  </property>
+  <property name="syncDocTypesToBroker" displayName="Synchronize Document Types To Broker During Deployment">
+    <value>true</value>
+  </property>
+  <asset name="ISPackage.JDBC103TestPackage" displayName="JDBC103TestPackage">
+    <implementation.generic type="ispackage" />
+  </asset>
+  <asset name="services.RetrieveInsert" displayName="services:RetrieveInsert">
+    <implementation.generic type="isflowservice" />
+    <dependsOn>IS:services.Retrieve</dependsOn>
+    <dependsOn>IS:services.Insert</dependsOn>
+  </asset>
+  <asset name="services.array" displayName="services:array">
+    <implementation.generic type="isjavaservice" />
+    <dependsOn>IS:JDBC103TestPackage.code.source.services.java</dependsOn>
+    <dependsOn>IS:JDBC103TestPackage.code.classes.services.class</dependsOn>
+  </asset>
+  <asset name="services.InsertFlow" displayName="services:InsertFlow">
+    <implementation.generic type="isflowservice" />
+    <dependsOn>IS:services.array</dependsOn>
+    <dependsOn>IS:services.Insert</dependsOn>
+  </asset>
+  <asset name="services.select" displayName="services:select">
+    <implementation.generic type="artservice" />
+    <dependsOn>IS:connections.OracleConnection</dependsOn>
+  </asset>
+  <asset name="services.Insert" displayName="services:Insert">
+    <implementation.generic type="artservice" />
+    <dependsOn>IS:connections.OracleConnection</dependsOn>
+  </asset>
+  <asset name="services.Retrieve" displayName="services:Retrieve">
+    <implementation.generic type="artservice" />
+    <dependsOn>IS:connections.OracleConnection</dependsOn>
+  </asset>
+  <asset name="services.ZTes23" displayName="services:ZTes23">
+    <implementation.generic type="artservice" />
+    <dependsOn>IS:connections.OracleConnection</dependsOn>
+  </asset>
+  <asset name="connections.OracleConnection" displayName="connections:OracleConnection">
+    <implementation.generic type="artconnection" />
+    <property name="art.deployment.state" displayName="State After Deployment">
+      <value>disable</value>
+    </property>
+    <property name="transactionType">
+      <value>LOCAL_TRANSACTION</value>
+    </property>
+    <property name="datasourceClass">
+      <value>oracle.jdbc.pool.OracleDataSource</value>
+    </property>
+    <property name="serverName">
+      <value>localhost</value>
+    </property>
+    <property name="user">
+      <value>JDBCAdapter</value>
+    </property>
+    <property name="password" isSecure="true">
+      <value>{AES}aYrXC43dTWsDUHRWG5mhTA==</value>
+    </property>
+    <property name="databaseName">
+      <value>ORCL</value>
+    </property>
+    <property name="portNumber">
+      <value>1521</value>
+    </property>
+    <property name="networkProtocol">
+      <value>tcp</value>
+    </property>
+    <property name="otherProperties">
+      <value>driverType=thin</value>
+    </property>
+    <property name=".CMGRPROP.poolable" displayName="poolable">
+      <value>true</value>
+    </property>
+    <property name=".CMGRPROP.minimumPoolSize" displayName="minimumPoolSize">
+      <value>1</value>
+    </property>
+    <property name=".CMGRPROP.maximumPoolSize" displayName="maximumPoolSize">
+      <value>10</value>
+    </property>
+    <property name=".CMGRPROP.poolIncrementSize" displayName="poolIncrementSize">
+      <value>1</value>
+    </property>
+    <property name=".CMGRPROP.blockingTimeout" displayName="blockingTimeout">
+      <value>1000</value>
+    </property>
+    <property name=".CMGRPROP.expireTimeout" displayName="expireTimeout">
+      <value>1000</value>
+    </property>
+    <property name=".CMGRPROP.startupRetryCount" displayName="startupRetryCount">
+      <value>0</value>
+    </property>
+    <property name=".CMGRPROP.startupBackoffSecs" displayName="startupBackoffSecs">
+      <value>10</value>
+    </property>
+  </asset>
+  <asset name="JDBC103TestPackage.code" displayName="code">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.code.classes" displayName="code/classes">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.code.classes.services.class" displayName="code/classes/services.class">
+    <implementation.generic type="isfile" />
+  </asset>
+  <asset name="JDBC103TestPackage.code.jars" displayName="code/jars">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.code.source" displayName="code/source">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.code.source.services.java" displayName="code/source/services.java">
+    <implementation.generic type="isfile" />
+  </asset>
+  <asset name="JDBC103TestPackage.config" displayName="config">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.doc" displayName="doc">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.lib" displayName="lib">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.pub" displayName="pub">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.resources" displayName="resources">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.templates" displayName="templates">
+    <implementation.generic type="isfolder" />
+  </asset>
+  <asset name="JDBC103TestPackage.web" displayName="web">
+    <implementation.generic type="isfolder" />
+  </asset>
+</asset_composite>
+
