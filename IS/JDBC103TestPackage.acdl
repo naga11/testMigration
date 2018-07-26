@@ -1,7 +1,7 @@
 <asset_composite xmlns="http://namespaces.softwareag.com/acdl/1.0" targetNamespace="http://namespaces.softwareag.com/webMethods/IS" name="JDBC103TestPackage" runtimeVersion="9.12.0.0">
   <implementation.generic type="ispackage" />
-  <buildInfo name="BuildVersion" value="9.8.34" />
-  <buildInfo name="BuildTimestamp" value="2018-07-26T17:10:54" />
+  <buildInfo name="BuildVersion" value="9.8.35" />
+  <buildInfo name="BuildTimestamp" value="2018-07-26T16:50:12" />
   <buildInfo name="MinimumTargetRuntimeVersion" value="9.12.0.0" />
   <property name="activatePkgOnInstall" displayName="Activate Package On Install">
     <value>true</value>
@@ -48,6 +48,10 @@
     <dependsOn>IS:services.array</dependsOn>
     <dependsOn>IS:services.Insert</dependsOn>
   </asset>
+  <asset name="services.insertSvc" displayName="services:insertSvc">
+    <implementation.generic type="artservice" />
+    <dependsOn>IS:connections.OracleConnection</dependsOn>
+  </asset>
   <asset name="services.select" displayName="services:select">
     <implementation.generic type="artservice" />
     <dependsOn>IS:connections.OracleConnection</dependsOn>
@@ -62,6 +66,26 @@
   </asset>
   <asset name="services.ZTes23" displayName="services:ZTes23">
     <implementation.generic type="artservice" />
+    <dependsOn>IS:connections.OracleConnection</dependsOn>
+  </asset>
+  <asset name="notifications.TestnotificaitonPublishDocument" displayName="notifications:TestnotificaitonPublishDocument">
+    <implementation.generic type="isdocumenttype" />
+  </asset>
+  <asset name="notifications.Testnotificaiton" displayName="notifications:Testnotificaiton">
+    <implementation.generic type="artpollingnotification" />
+    <property name="art.deployment.state" displayName="State After Deployment">
+      <value>enable</value>
+    </property>
+    <property name="notificationImmediate" displayName="Immediate:">
+      <value>false</value>
+    </property>
+    <property name="notificationInterval" displayName="Interval: (seconds)">
+      <value>10</value>
+    </property>
+    <property name="notificationOverlap" displayName="Overlap:">
+      <value>false</value>
+    </property>
+    <dependsOn>IS:notifications.TestnotificaitonPublishDocument</dependsOn>
     <dependsOn>IS:connections.OracleConnection</dependsOn>
   </asset>
   <asset name="connections.OracleConnection" displayName="connections:OracleConnection">
