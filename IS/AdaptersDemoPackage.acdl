@@ -1,8 +1,8 @@
-<asset_composite xmlns="http://namespaces.softwareag.com/acdl/1.0" targetNamespace="http://namespaces.softwareag.com/webMethods/IS" name="AdaptersDemoPackage" runtimeVersion="9.12.0.0">
+<asset_composite xmlns="http://namespaces.softwareag.com/acdl/1.0" targetNamespace="http://namespaces.softwareag.com/webMethods/IS" name="AdaptersDemoPackage" runtimeVersion="10.3.0.0">
   <implementation.generic type="ispackage" />
-  <buildInfo name="BuildVersion" value="9.8.39" />
-  <buildInfo name="BuildTimestamp" value="2018-08-09T17:59:00" />
-  <buildInfo name="MinimumTargetRuntimeVersion" value="9.12.0.0" />
+  <buildInfo name="BuildVersion" value="10.3.0.0.1535452980603" />
+  <buildInfo name="BuildTimestamp" value="2018-08-28T16:13:00" />
+  <buildInfo name="MinimumTargetRuntimeVersion" value="10.3.0.0" />
   <property name="activatePkgOnInstall" displayName="Activate Package On Install">
     <value>true</value>
   </property>
@@ -36,6 +36,18 @@
   <asset name="services.User" displayName="services:User">
     <implementation.generic type="isdocumenttype" />
   </asset>
+  <asset name="services.getUsersFromFinanceDB" displayName="services:getUsersFromFinanceDB">
+    <implementation.generic type="isflowservice" />
+    <dependsOn>IS:services.getUsersFinance</dependsOn>
+  </asset>
+  <asset name="services.registerEmployee" displayName="services:registerEmployee">
+    <implementation.generic type="isflowservice" />
+    <dependsOn>IS:services.insertEmployeeData</dependsOn>
+  </asset>
+  <asset name="services.getEmployeeDetails" displayName="services:getEmployeeDetails">
+    <implementation.generic type="isflowservice" />
+    <dependsOn>IS:services.selectAzure</dependsOn>
+  </asset>
   <asset name="services.action" displayName="services:action">
     <implementation.generic type="isflowservice" />
     <dependsOn>IS:notifications.onBoardEmployeeNotificationPublishDocument</dependsOn>
@@ -63,7 +75,7 @@
   <asset name="notifications.onBoardEmployeeNotification" displayName="notifications:onBoardEmployeeNotification">
     <implementation.generic type="artpollingnotification" />
     <property name="art.deployment.state" displayName="State After Deployment">
-      <value>enable</value>
+      <value>disable</value>
     </property>
     <property name="notificationImmediate" displayName="Immediate:">
       <value>false</value>
@@ -77,7 +89,7 @@
     <dependsOn>IS:notifications.onBoardEmployeeNotificationPublishDocument</dependsOn>
     <dependsOn>IS:connections.azuresqlConnection</dependsOn>
   </asset>
-  <asset name="notifications.trigger" displayName="notifications:trigger">
+  <asset name="notifications.TrigNew" displayName="notifications:TrigNew">
     <implementation.generic type="istrigger" />
     <dependsOn>IS:services.action</dependsOn>
     <dependsOn>IS:notifications.onBoardEmployeeNotificationPublishDocument</dependsOn>
@@ -85,58 +97,58 @@
   <asset name="connections.azuresqlConnection" displayName="connections:azuresqlConnection">
     <implementation.generic type="artconnection" />
     <property name="art.deployment.state" displayName="State After Deployment">
-      <value>enable</value>
+      <value>disable</value>
     </property>
-    <property name="transactionType">
-      <value>LOCAL_TRANSACTION</value>
-    </property>
-    <property name="datasourceClass">
-      <value>com.microsoft.sqlserver.jdbc.SQLServerDataSource</value>
-    </property>
-    <property name="serverName">
-      <value>sag.database.windows.net</value>
-    </property>
-    <property name="user">
-      <value>Pundits@sag</value>
-    </property>
-    <property name="password" isSecure="true">
-      <value>{AES}e+eosws3H9ZKtNrxML8i1Q==</value>
-    </property>
-    <property name="databaseName">
-      <value>adapters_sql_db</value>
-    </property>
-    <property name="portNumber">
+    <property name="otherProperties">
       <value />
     </property>
     <property name="networkProtocol">
       <value />
     </property>
-    <property name="otherProperties">
+    <property name="portNumber">
       <value />
     </property>
-    <property name=".CMGRPROP.poolable" displayName="poolable">
-      <value>true</value>
+    <property name="databaseName">
+      <value>adapters_sql_db</value>
     </property>
-    <property name=".CMGRPROP.minimumPoolSize" displayName="minimumPoolSize">
+    <property name="password" isSecure="true">
+      <value>{AES}e+eosws3H9ZKtNrxML8i1Q==</value>
+    </property>
+    <property name="user">
+      <value>Pundits@sag</value>
+    </property>
+    <property name="serverName">
+      <value>sag.database.windows.net</value>
+    </property>
+    <property name="datasourceClass">
+      <value>com.microsoft.sqlserver.jdbc.SQLServerDataSource</value>
+    </property>
+    <property name="transactionType">
+      <value>LOCAL_TRANSACTION</value>
+    </property>
+    <property name=".CMGRPROP.startupBackoffSecs" displayName="startupBackoffSecs">
+      <value>10</value>
+    </property>
+    <property name=".CMGRPROP.startupRetryCount" displayName="startupRetryCount">
+      <value>0</value>
+    </property>
+    <property name=".CMGRPROP.expireTimeout" displayName="expireTimeout">
+      <value>1000</value>
+    </property>
+    <property name=".CMGRPROP.blockingTimeout" displayName="blockingTimeout">
+      <value>1000</value>
+    </property>
+    <property name=".CMGRPROP.poolIncrementSize" displayName="poolIncrementSize">
       <value>1</value>
     </property>
     <property name=".CMGRPROP.maximumPoolSize" displayName="maximumPoolSize">
       <value>10</value>
     </property>
-    <property name=".CMGRPROP.poolIncrementSize" displayName="poolIncrementSize">
-      <value>1</value>
+    <property name=".CMGRPROP.minimumPoolSize" displayName="minimumPoolSize">
+      <value>3</value>
     </property>
-    <property name=".CMGRPROP.blockingTimeout" displayName="blockingTimeout">
-      <value>1000</value>
-    </property>
-    <property name=".CMGRPROP.expireTimeout" displayName="expireTimeout">
-      <value>1000</value>
-    </property>
-    <property name=".CMGRPROP.startupRetryCount" displayName="startupRetryCount">
-      <value>0</value>
-    </property>
-    <property name=".CMGRPROP.startupBackoffSecs" displayName="startupBackoffSecs">
-      <value>10</value>
+    <property name=".CMGRPROP.poolable" displayName="poolable">
+      <value>true</value>
     </property>
   </asset>
   <asset name="AdaptersDemoPackage.code" displayName="code">
